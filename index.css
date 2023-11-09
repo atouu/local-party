@@ -1,16 +1,26 @@
 @font-face {
-    font-family: 'Airbnb';
-    src: URL('../fonts/AirbnbCerealBlack.ttf') format('truetype');
+  font-family: 'Airbnb';
+  src: URL('../fonts/AirbnbCerealBlack.ttf') format('truetype');
 }
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 
 body {
   background-color: #111316;
   color: white;
-  font-family: 'Lexend Deca', sans-serif
+  font-family: 'Lexend Deca', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100dvh;
 }
 
-.back-btn{
-  font-size: 2rem;
+.back-btn {
+  width: 2rem;
   color: white;
 }
 
@@ -18,28 +28,39 @@ body {
   cursor: pointer;
 }
 
+
 /* Landing Page Start */
 
-.landing{
+.landing {
   display: none;
+  width: 100%;
+  height: 100%;
+  place-items: center;
 }
 
-.main{
+.landing > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.main {
   background-color: #111316;
   height: 100vh;
 }
 
-.logo{
+.logo {
   margin-top: 10vh;
 }
 
-.head{
+.head {
   font-size: 3.5rem;
   color: white;
   font-family: 'Airbnb';
 }
 
-.buttons{
+.buttons {
   border-radius: 5px;
   background-color: white;
   border: none;
@@ -49,17 +70,17 @@ body {
   height: 3rem;
 }
 
-.settings{
+.settings {
   width: 100%;
   position: absolute;
   bottom: 3rem;
 }
 
-.settings a:hover{
+.settings a:hover {
   color: white;
 }
 
-.icon{
+.icon {
   color: white;
   font-size: 2.5rem;
 }
@@ -72,20 +93,32 @@ body {
 
 /* Create Page Start */
 
-.create{
+.create, .join {
   display: none;
+  height: 100%;
 }
 
-.create-head{
+.header {
+  padding: 1em;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.content h1 {
+  text-align: center;
+}
+
+.create-head {
   font-family: 'Airbnb';
   font-size: 3.5rem;
 }
 
-.create-col{
-  margin-top: 20vh;
-}
-
-input{
+input {
   background-color: #111316;
   color: white;
   border-radius: 5px;
@@ -95,16 +128,16 @@ input{
   padding: 10px 15px;
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
 
-.fileInput{
+.fileInput {
   width: 20rem;
   margin: auto;
 }
 
-.dragDrop{
+.dragDrop {
   margin: auto;
   text-align: left;
   background-color: white;
@@ -121,11 +154,11 @@ input:focus{
 
 /* Join Page Start */
 
-.join{
+.join {
   display: none;
 }
 
-.join-col{
+.join-col {
   margin-top: 20vh;
 }
 
@@ -133,134 +166,118 @@ input:focus{
 
 /* Room Page Start */
 
-.room{
+.room {
   display: none;
+  height: 100%;
 }
 
-.left-side{
-  background-color: black;
-  height: 100vh;
-  width: 78%;
-}
-
-#roomCodeText:hover{
+#roomCodeText:hover {
   cursor: pointer;
 }
 
-.right-side{
-  height: 100vh;
-  width: 22%;
-  background-color: #111316;
+.right-side {
+  display: flex;
+  flex-flow: column;
+  width: 25em;
+  background-color: #222;
+  padding: 1em;
 }
 
-.video{
-  width: 100%;
+.action-bar {
+  display: flex;
+}
+
+.action-bar h2 {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.action-icon {
+  width: 2.5em;
+}
+
+
+.video {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
   height: 100%;
   border-radius: 30px;
 }
 
-#video-player{
+#video-player {
   width: 100%;
   height: 100%;
 }
 
-.icon{
+.icon {
   font-size: 1.5rem;
 }
 
-.room-code, .members{
+.room-code,
+.members {
   font-size: 1.2rem;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 5px;
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   background-color: rgb(73, 73, 73);
   border-radius: 50px;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 50px;
 }
 
-#messages-box{
-  display: block;
+#messages-box {
+  
 }
 
-.messages{
-  height: 80vh;
+.messages {
+  display: block;
   overflow-y: scroll;
   overflow-x: hidden;
+  flex-grow: 1;
+  height: 0;
 }
 
-@media(max-width: 2000px){
-.messages{
-  height: 79vh;
-} 
-}
-
-@media(max-width: 1600px){
-.messages{
-  height: 75vh;
-} 
-}
-
-@media(max-width: 1500px){
-.messages{
-  height: 74vh;
-  font-size: 0.9rem;
-} 
-}
-
-@media(max-width: 1400px){
-.messages{
-  font-size: 0.8rem;
-} 
-}
-
-@media(max-width: 1300px){
-.messages{
-  font-size: 0.7rem;
-} 
-}
-
-@media(max-width: 900px){
-.messages{
-  height: 65vh;
-} 
-}
-
-@media(max-width: 700px){
-.messages{
-  height: 63vh;
-} 
-}
-
-.chattimg{
-  position: absolute;
-  bottom: 20px;
-  width: 22%;
-}
-
-#messageInp{
+#messageInp {
   border-radius: 5px;
   height: 2.5rem;
-  width: inherit;
+  width: 100%;
   box-shadow: none;
   border: none;
   color: white;
   background-color: gray;
 }
 
-#messageInp::placeholder{
+#messageInp::placeholder {
   color: white;
   font-size: 0.8rem;
 }
 
-#message{
+#message {
   height: fit-content;
 }
+
 /* Room Page End */
+
+@media (max-width: 450px) {
+  .room {
+    flex-flow: column;
+  }
+  .video {
+    flex-grow: 0;
+    height: auto;
+    width: 100%;
+  }
+
+  .right-side {
+    flex-grow: 1;
+    width: 100%;
+  }
+}

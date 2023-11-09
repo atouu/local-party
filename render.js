@@ -53,7 +53,7 @@ const socket = io.connect("https://local-party.herokuapp.com")
 
 socket.on('connect', function (socket) {
     console.log('Connected to the server!');   
-    landingPage.style.display = "block" 
+    landingPage.style.display = "grid" 
 });
 
 
@@ -67,7 +67,7 @@ socket.on('user-joined', data => {
         document.getElementById("pplinparty").setAttribute("title", `People in party: ${data.members}`)
         var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
         toolTipTriggerList.map(function (tooltipTriggerE1){
-            return new bootstrap.Tooltip(tooltipTriggerE1)
+            
             });
         document.getElementById("messages-box").scrollTop = document.getElementById("messages-box").scrollHeight
     }
@@ -78,7 +78,7 @@ socket.on('updateMemberInfo', data => {
         document.getElementById("pplinparty").setAttribute("title", `People in party: ${data.members}`)
         var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
         toolTipTriggerList.map(function (tooltipTriggerE1){
-            return new bootstrap.Tooltip(tooltipTriggerE1)
+            
         });
     }
 })
@@ -102,7 +102,7 @@ socket.on('left', data => {
     document.getElementById("pplinparty").setAttribute("title", `People in party: ${data.members}`)
     var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
     var toolTipList = toolTipTriggerList.map(function (tooltipTriggerE1){
-        return new bootstrap.Tooltip(tooltipTriggerE1)
+        
         });
     document.getElementById("messages-box").scrollTop = document.getElementById("messages-box").scrollHeight
 })
@@ -116,7 +116,7 @@ socket.on('leftdefault', data => {
     document.getElementById("pplinparty").setAttribute("title", `People in party: ${data.members}`)
     var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
     var toolTipList = toolTipTriggerList.map(function (tooltipTriggerE1){
-        return new bootstrap.Tooltip(tooltipTriggerE1)
+        
         });
     document.getElementById("messages-box").scrollTop = document.getElementById("messages-box").scrollHeight
 })
@@ -210,14 +210,14 @@ document.addEventListener("click", function (e) {
                     if(resp.message == "success") {
                         var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
                         var toolTipList = toolTipTriggerList.map(function (tooltipTriggerE1){
-                            return new bootstrap.Tooltip(tooltipTriggerE1)
+                            
                         });
                         localStorage.setItem("roomCode", roomCode)
                         appendData(roomName, roomCode)
                         socket.emit('new-user-joined', { name: localStorage.getItem("username"), roomCode: roomCode, pfp: localStorage.getItem("pfpUrl") })
                         createPage.style.display = "none"
                         document.title = `Local Party | ${roomName}`
-                        roomPage.style.display = "block"
+                        roomPage.style.display = "flex"
                     }
                 })
                 .catch(error => console.log('error', error));
@@ -262,7 +262,7 @@ document.addEventListener("click", function (e) {
                         document.getElementById("roomCodeText").innerHTML = resp.roomCode
                         var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
                         var toolTipList = toolTipTriggerList.map(function (tooltipTriggerE1){
-                            return new bootstrap.Tooltip(tooltipTriggerE1)
+                            
                         });
                         localStorage.setItem("roomCode", inputRoomCode)
                         localStorage.setItem("username", document.getElementById("join-username").value)
@@ -271,7 +271,7 @@ document.addEventListener("click", function (e) {
                         socket.emit('new-user-joined', { name: localStorage.getItem("username"), roomCode: resp.roomCode, pfp: localStorage.getItem("pfpUrl") })
                         joinPage.style.display = "none"
                         document.title = `Local Party | ${resp.roomName}`
-                        roomPage.style.display = "block"
+                        roomPage.style.display = "flex"
                     }   
                 })
                 .catch(error => console.log('error', error));
@@ -290,6 +290,26 @@ document.addEventListener("click", function (e) {
         landingPage.style.display = "block"
     }
 })
+
+///////
+const messageInp = document.getElementById("messageInp")
+
+messageInp.addEventListener("keyup", ({key}) => {
+    if (key === "Enter") {
+        const messageInput = messageInp.value
+        if(messageInput.split(" ").join("").length != 0) {
+            socket.emit('send', messageInput)
+            append({
+                name: localStorage.getItem("username"),
+                content: messageInput,
+                pfp: localStorage.getItem("pfpUrl")
+            })
+            document.getElementById("messageInp").value = ""
+            document.getElementById("messages-box").scrollTop = document.getElementById("messages-box").scrollHeight
+        }
+    }
+})
+
 
 const form = document.getElementById("send-form")
 
